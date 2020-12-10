@@ -1,0 +1,2 @@
+Local file storage of SmartApp access tokens
+Copyright 2020 SmartThings, Inc. All rights reserved

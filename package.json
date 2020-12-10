@@ -1,0 +1,26 @@
+{
+  "name": "@smartthings/file-context-store",
+  "version": "2.1.0",
+  "description": "Stores SmartApp configuration and auth tokens for use in app-initiated calls",
+  "displayName": "SmartThings SmartApp File Context Store",
+  "main": "index.js",
+  "author": "SmartThings",
+  "contributors": [
+    "Bob Florian"
+  ],
+  "keywords": [
+    "smartthings",
+    "smartapp"
+  ],
+  "scripts": {
+    "test": ""
+  },
+  "license": "Apache-2.0",
+  "repository": "github.com:SmartThingsCommunity/file-context-store-nodejs.git",
+  "bugs": {
+    "url": "https://github.com/SmartThingsCommunity/file-context-store-nodejs/issues"
+  },
+  "homepage": "https://github.com/SmartThingsCommunity/file-context-store-nodejs#readme",
+  "dependencies": {},
+  "devDependencies": {}
+}
