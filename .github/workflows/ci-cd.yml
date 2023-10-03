@@ -1,0 +1,44 @@
+name: CI/CD
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    branches:
+      - main
+
+jobs:
+  lint-commits:
+    if: github.event_name == 'pull_request'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+      - run: npm ci --ignore-scripts
+      - run: npx commitlint --from HEAD~${{ github.event.pull_request.commits }} --to HEAD
+
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        # add/remove versions as we move support forward
+        node-version: [16, 18]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run test
