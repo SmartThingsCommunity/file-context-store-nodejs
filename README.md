@@ -6,6 +6,7 @@ The context stored by this module consists of the following data elements:
 
 * **installedAppId**: the UUID of the installed app instance. This is the primary key of the table.
 * **locationId**: the UUID of the location in which the app is installed
+* **locale**: the locale client used to install the app
 * **authToken**: the access token used in calling the API
 * **refreshToken**: the refresh token used in generating a new access token when one expires
 * **config**: the current installed app instance configuration, i.e. selected devices, options, etc.
@@ -22,7 +23,7 @@ Create a `FileContextStore` object and pass it to the SmartApp connector to stor
 directory on the local machine.
 
 ```javascript
-smartapp.contextStore(new DynamoDBContextStore())
+smartapp.contextStore(new FileContextStore())
 ```
 
 The default storage is in a directory named `data` in the project location. 
@@ -33,10 +34,12 @@ constructor.
 smartapp.contextStore(new FileContextStore('/opt/data/smartapp'))
 ```
 
-## Storage Format
+## Storage Formats
+
+### Installed App Context
 
 Each installedApp instance context record is stored as a JSON string in a file with the name
-`<installedAppId>.json`. For example:
+`<installedAppId>.json` in the data directory. For example:
 ```json
 {
   "installedAppId": "b643d57e-e2eb-40e4-b2ef-ff43519941cc",
@@ -72,6 +75,16 @@ Each installedApp instance context record is stored as a JSON string in a file w
     ]
   }
 }
+```
+
+### State Storage
+
+State storage is a name-value store for the installed app instance. This is useful for storing information
+between invocations of the SmartApp. Each state property is stored in a separate file with the name
+`<installedAppId>/<stateName>.json` in the data directory. For example a numeric state property named 
+`count` with a value of `5` would be stored in a file named `b643d57e-e2eb-40e4-b2ef-ff43519941cc/count.json`:
+```json
+5
 ```
 ## Caveats
 
