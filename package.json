@@ -1,6 +1,6 @@
 {
   "name": "@smartthings/file-context-store",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Stores SmartApp configuration and auth tokens for use in app-initiated calls",
   "displayName": "SmartThings SmartApp File Context Store",
   "main": "index.js",
